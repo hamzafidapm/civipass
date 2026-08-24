@@ -27,9 +27,20 @@ final class CiviPassScreenshotUITests: XCTestCase {
             attach(app, named: "04-quiz-answered")
 
             tapElement(app.navigationBars.buttons.firstMatch)
+            // Wait for the pop-back transition to fully settle — tapping the tab bar
+            // while it was still mid-transition let the tap land on the still-visible
+            // Study screen instead of switching tabs, so "05-progress" silently
+            // captured the wrong screen.
+            _ = app.segmentedControls.firstMatch.waitForExistence(timeout: 5)
         }
 
-        tapButton(app.tabBars.buttons, labelContains: "Progress")
+        // Target the tab's accessibilityIdentifier rather than its label — labels are
+        // more fragile (wording changes, VoiceOver text combining, etc.).
+        tapElement(app.tabBars.buttons["tab.progress"])
+        // Confirm the Progress screen's own content actually loaded before capturing.
+        // This check is what would have caught the wrong-screen bug immediately
+        // instead of letting it pass silently.
+        _ = app.navigationBars["Progress"].waitForExistence(timeout: 5)
         attach(app, named: "05-progress")
 
         tapButton(app.tabBars.buttons, labelContains: "Study")

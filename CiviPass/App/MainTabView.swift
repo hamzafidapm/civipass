@@ -13,6 +13,7 @@ struct MainTabView: View {
                         Label(tab.title, systemImage: tab.systemImage)
                     }
                     .tag(tab)
+                    .accessibilityIdentifier("tab.\(tab.rawValue)")
             }
         }
     }
