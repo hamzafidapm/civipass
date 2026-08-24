@@ -22,7 +22,10 @@ final class EntitlementManager {
     private(set) var isLoadingProducts = false
     var errorMessage: String?
 
-    private var transactionListenerTask: Task<Void, Never>?
+    // deinit is always nonisolated, even on a @MainActor class, so it can't read a
+    // MainActor-isolated stored property. Task.cancel() is thread-safe, so it's safe to
+    // exempt this property from isolation checking rather than restructure the listener.
+    nonisolated(unsafe) private var transactionListenerTask: Task<Void, Never>?
 
     /// True once the user holds any unlocking purchase — lifetime, or an active monthly/yearly subscription.
     var hasPremiumAccess: Bool {
