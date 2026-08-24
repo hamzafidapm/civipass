@@ -26,16 +26,15 @@ enum QuestionRepository {
         try context.save()
     }
 
+    // #Predicate can't capture an enum constant directly (SwiftDataError.unsupportedPredicate),
+    // and the full question bank is small (the entire USCIS test corpus is ~100-128 questions),
+    // so these filter in Swift after an unpredicated fetch rather than routing through the predicate macro.
     static func questions(in category: StudyCategory, context: ModelContext) throws -> [Question] {
-        try context.fetch(FetchDescriptor<Question>(
-            predicate: #Predicate { $0.category == category }
-        ))
+        try context.fetch(FetchDescriptor<Question>()).filter { $0.category == category }
     }
 
     static func questions(difficulty: QuestionDifficulty, context: ModelContext) throws -> [Question] {
-        try context.fetch(FetchDescriptor<Question>(
-            predicate: #Predicate { $0.difficulty == difficulty }
-        ))
+        try context.fetch(FetchDescriptor<Question>()).filter { $0.difficulty == difficulty }
     }
 
     static func randomQuizSet(count: Int, context: ModelContext) throws -> [Question] {
