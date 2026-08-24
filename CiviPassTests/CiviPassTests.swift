@@ -39,4 +39,30 @@ struct CiviPassTests {
         let totalAfterRerun = try context.fetchCount(FetchDescriptor<Question>())
         #expect(totalAfterRerun == 10)
     }
+
+    @Test func quizScoringCountsCorrectAnswers() {
+        let q1 = Question(category: .americanGovernment, questionText: "Q1", options: ["A", "B"], correctAnswerIndex: 0, difficulty: .easy)
+        let q2 = Question(category: .americanGovernment, questionText: "Q2", options: ["A", "B"], correctAnswerIndex: 1, difficulty: .easy)
+        let q3 = Question(category: .americanHistory, questionText: "Q3", options: ["A", "B", "C"], correctAnswerIndex: 2, difficulty: .medium)
+
+        let viewModel = QuizViewModel()
+        viewModel.configure(with: [q1, q2, q3])
+        #expect(viewModel.isFinished == false)
+
+        viewModel.selectAnswer(0) // correct for q1
+        #expect(viewModel.correctCount == 1)
+        viewModel.advance()
+
+        viewModel.selectAnswer(0) // incorrect for q2 (correct index is 1)
+        #expect(viewModel.correctCount == 1)
+        viewModel.advance()
+
+        #expect(viewModel.isFinished == false)
+        viewModel.selectAnswer(2) // correct for q3
+        viewModel.advance()
+
+        #expect(viewModel.isFinished == true)
+        #expect(viewModel.correctCount == 2)
+        #expect(viewModel.scorePercentage == 67)
+    }
 }
