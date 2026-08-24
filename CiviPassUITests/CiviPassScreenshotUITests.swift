@@ -34,9 +34,16 @@ final class CiviPassScreenshotUITests: XCTestCase {
             _ = app.segmentedControls.firstMatch.waitForExistence(timeout: 5)
         }
 
-        // Target the tab's accessibilityIdentifier rather than its label — labels are
-        // more fragile (wording changes, VoiceOver text combining, etc.).
-        tapElement(app.tabBars.buttons["tab.progress"])
+        // AppTab has 6 cases, and iOS's tab bar auto-collapses everything past the
+        // first 4 into a system-generated "More" list — Progress isn't a directly
+        // tappable top-level tab. That list's rows are built entirely by
+        // UITabBarController internals, not by any SwiftUI view of ours, so there's
+        // no accessibilityIdentifier of ours to attach to the row itself; its label
+        // ("Progress") comes straight from AppTab.progress.title, not a guess.
+        tapButton(app.tabBars.buttons, labelContains: "More")
+        if !tapButton(app.cells, labelContains: "Progress") {
+            _ = tapButton(app.buttons, labelContains: "Progress")
+        }
         // Confirm the Progress screen's own content actually loaded before capturing.
         // This check is what would have caught the wrong-screen bug immediately
         // instead of letting it pass silently.
