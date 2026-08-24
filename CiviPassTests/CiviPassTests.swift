@@ -68,4 +68,42 @@ struct CiviPassTests {
         #expect(viewModel.correctCount == 2)
         #expect(viewModel.scorePercentage == 67)
     }
+
+    @Test func progressStatsComputesAccuracyAndStreak() {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "UTC")!
+
+        let today = calendar.date(from: DateComponents(year: 2026, month: 6, day: 15))!
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: today)!
+        let twoDaysAgo = calendar.date(byAdding: .day, value: -2, to: today)!
+        let fourDaysAgo = calendar.date(byAdding: .day, value: -4, to: today)! // gap: shouldn't extend the streak
+
+        let attempts = [
+            QuizAttempt(date: today, totalQuestions: 10, correctCount: 8),
+            QuizAttempt(date: yesterday, totalQuestions: 10, correctCount: 10),
+            QuizAttempt(date: twoDaysAgo, category: .americanHistory, totalQuestions: 5, correctCount: 3),
+            QuizAttempt(date: fourDaysAgo, totalQuestions: 10, correctCount: 5)
+        ]
+
+        let summary = ProgressStats.summarize(attempts, today: today, calendar: calendar)
+
+        #expect(summary.totalQuizzes == 4)
+        // 8 + 10 + 3 + 5 = 26 correct out of 10 + 10 + 5 + 10 = 35 questions
+        #expect(abs(summary.overallAccuracy - (26.0 / 35.0)) < 0.0001)
+        #expect(summary.currentStreakDays == 3) // today, yesterday, two days ago — then the gap breaks it
+        #expect(summary.categoryBreakdown.count == 2) // Mixed (nil) and American History
+    }
+
+    @Test func currentStreakIsZeroWithoutAttemptToday() {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "UTC")!
+
+        let today = calendar.date(from: DateComponents(year: 2026, month: 6, day: 15))!
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: today)!
+
+        let attemptsWithGapToday = [QuizAttempt(date: yesterday, totalQuestions: 5, correctCount: 5)]
+
+        #expect(ProgressStats.currentStreak(attemptsWithGapToday, today: today, calendar: calendar) == 0)
+        #expect(ProgressStats.currentStreak([], today: today, calendar: calendar) == 0)
+    }
 }

@@ -3,7 +3,8 @@ import SwiftData
 enum PersistenceController {
     static let schema = Schema([
         Question.self,
-        StudyStreak.self
+        StudyStreak.self,
+        QuizAttempt.self
     ])
 
     static let sharedModelContainer: ModelContainer = {

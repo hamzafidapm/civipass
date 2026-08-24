@@ -33,6 +33,22 @@ struct QuizView: View {
             hasStarted = true
             viewModel.start(context: modelContext, count: questionCount)
         }
+        .onChange(of: viewModel.isFinished) {
+            guard viewModel.isFinished, !viewModel.questions.isEmpty else { return }
+            saveCompletedAttempt()
+        }
+    }
+
+    private func saveCompletedAttempt() {
+        do {
+            try QuizAttemptRepository.save(
+                totalQuestions: viewModel.questions.count,
+                correctCount: viewModel.correctCount,
+                context: modelContext
+            )
+        } catch {
+            print("QuizView: failed to save quiz attempt - \(error)")
+        }
     }
 }
 
