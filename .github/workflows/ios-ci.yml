@@ -51,37 +51,18 @@ jobs:
       - name: Test
         run: |
           set -o pipefail
-          # xcodebuild's -collect-test-diagnostics only accepts "on-failure" or "never"
-          # (confirmed by a real CI failure) — it cannot express "always", and passing
-          # it would override a test plan's own diagnostics policy anyway. Video
-          # collection is instead controlled by CiviPass.xctestplan's Diagnostics
-          # settings (set to collect on every run, not just failures).
-          #
-          # -testPlan requires the scheme to actually list the plan as available, which
-          # depends on xcodegen having wired project.yml's testPlans: key correctly —
-          # unverified from here. -showTestPlans is a read-only query (no tests run),
-          # so probing it first can't mask a real test failure: if the plan isn't
-          # recognized, we just run without it instead of failing the whole step.
-          USE_TEST_PLAN=false
-          if xcodebuild -showTestPlans -project CiviPass.xcodeproj -scheme CiviPass 2>&1 \
-              | grep -v "associated with" | grep -q "CiviPass"; then
-            USE_TEST_PLAN=true
-            echo "Scheme reports CiviPass.xctestplan is available; using -testPlan CiviPass so its Diagnostics settings (including always-on video) take effect."
-          else
-            echo "Scheme does not report CiviPass.xctestplan as an available test plan (xcodegen may not have wired it, or -showTestPlans isn't supported here) — running without -testPlan. No video will be collected this run."
-          fi
-
-          TEST_PLAN_FLAG=""
-          if [ "$USE_TEST_PLAN" = true ]; then
-            TEST_PLAN_FLAG="-testPlan CiviPass"
-          fi
-
+          # Video capture via a test plan is deferred, not abandoned: a hand-authored
+          # CiviPass.xctestplan turned out to be unreadable by Xcode entirely ("test
+          # plan could not be read"), and neither its exact schema nor the project's
+          # real target identifiers can be verified without Xcode's own test plan
+          # editor. Running the scheme's plain target list instead — the same
+          # known-working configuration used before video capture was attempted.
+          # Screenshots (via CiviPassScreenshotUITests) are unaffected either way.
           xcodebuild test \
             -project CiviPass.xcodeproj \
             -scheme CiviPass \
             -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device_name }}" \
             -resultBundlePath TestResults.xcresult \
-            $TEST_PLAN_FLAG \
             CODE_SIGNING_ALLOWED=NO
 
       # Runs even if the Test step failed above — a screenshot from a failing run is
