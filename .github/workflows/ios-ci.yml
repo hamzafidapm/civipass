@@ -51,16 +51,30 @@ jobs:
       - name: Test
         run: |
           set -o pipefail
+          # Ask for diagnostics (screen recordings included) on every test, not just
+          # failures — but only if this Xcode actually supports the flag, so a wrong
+          # guess here can't break the whole test run. Introduced in Xcode 15; the
+          # example CiviPass.xctestplan at the repo root documents the same intent for
+          # anyone opening the project directly in Xcode, though its exact diagnostics
+          # schema/target IDs are unverified and may need adjusting there too.
+          DIAGNOSTICS_FLAG=""
+          if xcodebuild -help 2>&1 | grep -q -- "-collect-test-diagnostics"; then
+            DIAGNOSTICS_FLAG="-collect-test-diagnostics always"
+            echo "xcodebuild supports -collect-test-diagnostics; requesting diagnostics (including video) for all tests."
+          else
+            echo "xcodebuild does not report -collect-test-diagnostics support on this Xcode version; running without it (no video capture)."
+          fi
           xcodebuild test \
             -project CiviPass.xcodeproj \
             -scheme CiviPass \
             -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device_name }}" \
             -resultBundlePath TestResults.xcresult \
+            $DIAGNOSTICS_FLAG \
             CODE_SIGNING_ALLOWED=NO
 
       # Runs even if the Test step failed above — a screenshot from a failing run is
       # still useful, and this step must never be what fails the whole CI job.
-      - name: Extract UI test screenshots
+      - name: Extract UI test screenshots and video
         if: always()
         run: |
           mkdir -p screenshots
@@ -68,11 +82,16 @@ jobs:
             xcrun xcresulttool export attachments \
               --path TestResults.xcresult \
               --output-path screenshots \
-              || echo "xcresulttool export attachments failed (subcommand may differ on this Xcode version) — screenshots may be missing."
+              || echo "xcresulttool export attachments failed (subcommand may differ on this Xcode version) — screenshots/video may be missing."
           else
-            echo "No TestResults.xcresult bundle found; skipping screenshot extraction."
+            echo "No TestResults.xcresult bundle found; skipping extraction."
           fi
           ls -la screenshots || true
+          if find screenshots -iname "*.mov" 2>/dev/null | grep -q .; then
+            echo "Found a video recording (.mov) among the extracted attachments."
+          else
+            echo "No .mov video attachment found — diagnostics video collection may not be enabled on this Xcode/runner. Screenshots (if any) are unaffected."
+          fi
 
       - name: Upload UI test screenshots
         if: always()
@@ -80,5 +99,14 @@ jobs:
         with:
           name: ui-test-screenshots
           path: screenshots
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Upload demo video
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-demo-video
+          path: screenshots/*.mov
           if-no-files-found: warn
           retention-days: 14
