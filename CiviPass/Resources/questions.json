@@ -1,84 +1,716 @@
 [
   {
     "category": "American Government",
-    "questionText": "Placeholder question: What is the supreme law of the land?",
-    "options": ["The Constitution", "The Declaration of Independence", "The Bill of Rights", "Federal law"],
+    "questionText": "What is the supreme law of the land?",
+    "options": [
+      "The Constitution",
+      "The Declaration of Independence",
+      "The Bill of Rights",
+      "Federal law"
+    ],
     "correctAnswerIndex": 0,
-    "explanation": "Placeholder explanation: the Constitution establishes the framework of the federal government.",
+    "explanation": "The Constitution is the supreme law of the land. Every law, at every level of government, must be consistent with it.",
     "difficulty": "easy",
-    "source": "Placeholder source citation 1"
+    "source": "USCIS Civics Test (2008 version)"
   },
   {
     "category": "American Government",
-    "questionText": "Placeholder question: How many branches does the federal government have?",
-    "options": ["Two", "Three", "Four", "Five"],
+    "questionText": "What does the Constitution do?",
+    "options": [
+      "Declares independence from Great Britain",
+      "Sets up the government, defines the government, and protects basic rights of Americans",
+      "Lists the powers reserved to the states",
+      "Establishes the national anthem and flag"
+    ],
     "correctAnswerIndex": 1,
-    "explanation": "Placeholder explanation: legislative, executive, and judicial.",
-    "difficulty": "medium"
+    "explanation": "The Constitution establishes the structure of the federal government, defines the powers and limits of each branch, and protects the fundamental rights of the American people.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
   },
   {
     "category": "American Government",
-    "questionText": "Placeholder question: What stops one branch of government from becoming too powerful?",
-    "options": ["Elections", "Checks and balances", "The military"],
-    "correctAnswerIndex": 1,
-    "difficulty": "hard"
-  },
-  {
-    "category": "American Government",
-    "questionText": "Placeholder question: Who is Commander in Chief of the military?",
-    "options": ["The Speaker of the House", "The President", "The Chief Justice", "The Secretary of Defense"],
-    "correctAnswerIndex": 1,
-    "explanation": "Placeholder explanation: the President holds this constitutional role.",
-    "difficulty": "easy"
-  },
-  {
-    "category": "American Government",
-    "questionText": "Placeholder question: What do we call the first ten amendments to the Constitution?",
-    "options": ["The Preamble", "The Federalist Papers", "The Bill of Rights", "The Articles of Confederation", "The Emancipation Proclamation", "The Gettysburg Address"],
+    "questionText": "The idea of self-government is in the first three words of the Constitution. What are these words?",
+    "options": [
+      "In God We Trust",
+      "Life and Liberty",
+      "We the People",
+      "One Nation, Indivisible"
+    ],
     "correctAnswerIndex": 2,
-    "explanation": "Placeholder explanation: these ten amendments protect individual rights.",
-    "difficulty": "medium",
-    "source": "Placeholder source citation 2"
-  },
-  {
-    "category": "American History",
-    "questionText": "Placeholder question: What year was the Declaration of Independence adopted?",
-    "options": ["1492", "1776", "1789", "1812"],
-    "correctAnswerIndex": 1,
-    "explanation": "Placeholder explanation: adopted on July 4, 1776.",
+    "explanation": "The Constitution's preamble begins with “We the People,” expressing the principle that governmental power comes from the people.",
     "difficulty": "easy",
-    "source": "Placeholder source citation 3"
+    "source": "USCIS Civics Test (2008 version)"
   },
   {
-    "category": "American History",
-    "questionText": "Placeholder true/false: George Washington was the first President of the United States.",
-    "options": ["True", "False"],
-    "correctAnswerIndex": 0,
-    "difficulty": "easy"
-  },
-  {
-    "category": "American History",
-    "questionText": "Placeholder question: What territory did the United States buy from France in 1803?",
-    "options": ["Alaska", "Louisiana Territory", "Texas", "Florida"],
-    "correctAnswerIndex": 1,
-    "explanation": "Placeholder explanation: the Louisiana Purchase roughly doubled the size of the United States.",
-    "difficulty": "medium"
-  },
-  {
-    "category": "American History",
-    "questionText": "Placeholder question: Name one war fought by the United States in the 1900s.",
-    "options": ["World War I", "The Napoleonic Wars", "The War of the Roses", "The Crimean War"],
-    "correctAnswerIndex": 0,
-    "difficulty": "hard",
-    "source": "Placeholder source citation 4"
-  },
-  {
-    "category": "American History",
-    "questionText": "Placeholder question: Who was President during the Great Depression and World War II?",
-    "options": ["Herbert Hoover", "Franklin Roosevelt", "Harry Truman", "Dwight Eisenhower"],
-    "correctAnswerIndex": 1,
-    "explanation": "Placeholder explanation: Franklin Roosevelt served an unprecedented four terms.",
+    "category": "American Government",
+    "questionText": "What is an amendment?",
+    "options": [
+      "A veto by the President",
+      "A ruling by the Supreme Court",
+      "A new federal law",
+      "A change (or addition) to the Constitution"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "An amendment is a formal change or addition to the Constitution, made through the amendment process described in Article V.",
     "difficulty": "medium",
-    "source": "Placeholder source citation 5"
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "What do we call the first ten amendments to the Constitution?",
+    "options": [
+      "The Bill of Rights",
+      "The Federalist Papers",
+      "The Articles of Confederation",
+      "The Emancipation Proclamation"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "The first ten amendments, ratified in 1791, are known as the Bill of Rights and protect fundamental individual liberties.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "What is one right or freedom from the First Amendment?",
+    "options": [
+      "The right to bear arms",
+      "Freedom of speech",
+      "The right to a speedy trial",
+      "The right to vote"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "The First Amendment protects freedom of speech, along with freedom of religion, the press, assembly, and the right to petition the government.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "How many amendments does the Constitution have?",
+    "options": [
+      "10",
+      "21",
+      "27",
+      "35"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "The Constitution has been amended 27 times since it was ratified, beginning with the Bill of Rights in 1791.",
+    "difficulty": "hard",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "What did the Declaration of Independence do?",
+    "options": [
+      "Created the United States Congress",
+      "Established the Supreme Court",
+      "Ended the Revolutionary War",
+      "Announced our independence from Great Britain"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "Adopted in 1776, the Declaration of Independence announced that the thirteen colonies considered themselves independent from Great Britain.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "What is the economic system in the United States?",
+    "options": [
+      "Capitalist economy (market economy)",
+      "Command economy",
+      "Barter economy",
+      "State-planned economy"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "The United States has a capitalist, or market-based, economy in which individuals and businesses largely make their own economic decisions.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "What is the rule of law?",
+    "options": [
+      "Only citizens must obey federal law",
+      "Everyone must follow the law, and no one is above it",
+      "The President can override any law",
+      "Laws only apply within a person's home state"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "The rule of law means that everyone, including leaders and government officials, must obey the law equally.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "Who makes federal laws?",
+    "options": [
+      "The President",
+      "The Supreme Court",
+      "Congress",
+      "The Cabinet"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "Congress, made up of the Senate and House of Representatives, is the legislative branch responsible for making federal laws.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "What are the two parts of the U.S. Congress?",
+    "options": [
+      "The House and the Cabinet",
+      "The Senate and the Supreme Court",
+      "The Assembly and the Council",
+      "The Senate and the House of Representatives"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "Congress is bicameral, meaning it is made up of two chambers: the Senate and the House of Representatives.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "How many U.S. Senators are there?",
+    "options": [
+      "100",
+      "50",
+      "435",
+      "27"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "There are 100 U.S. Senators, two from each of the 50 states.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "How many voting members are in the House of Representatives?",
+    "options": [
+      "100",
+      "435",
+      "50",
+      "535"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "The House of Representatives has 435 voting members, apportioned among the states based on population.",
+    "difficulty": "hard",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "We elect a U.S. Senator for how many years?",
+    "options": [
+      "2",
+      "4",
+      "6",
+      "8"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "U.S. Senators serve six-year terms, with roughly one-third of the Senate up for election every two years.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "If both the President and the Vice President can no longer serve, who becomes President?",
+    "options": [
+      "The Senate Majority Leader",
+      "The Chief Justice of the United States",
+      "The Secretary of State",
+      "The Speaker of the House"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "The presidential line of succession places the Speaker of the House next in line after the Vice President.",
+    "difficulty": "hard",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American Government",
+    "questionText": "What is the highest court in the United States?",
+    "options": [
+      "The Supreme Court",
+      "The Court of Appeals",
+      "The District Court",
+      "The Federal Claims Court"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "The Supreme Court is the highest court in the United States and has the final say on federal constitutional questions.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "Who wrote the Declaration of Independence?",
+    "options": [
+      "George Washington",
+      "Thomas Jefferson",
+      "Benjamin Franklin",
+      "John Adams"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "Thomas Jefferson was the principal author of the Declaration of Independence, adopted by the Continental Congress in 1776.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "When was the Declaration of Independence adopted?",
+    "options": [
+      "September 17, 1787",
+      "December 7, 1787",
+      "July 4, 1776",
+      "March 4, 1789"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "The Continental Congress adopted the Declaration of Independence on July 4, 1776.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "What is one reason colonists came to America?",
+    "options": [
+      "To join the Continental Congress",
+      "To establish the Supreme Court",
+      "To fight in the Civil War",
+      "Freedom and religious liberty"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "Many colonists came to America seeking political liberty, religious freedom, or economic opportunity.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "Why did the colonists fight the British?",
+    "options": [
+      "Because of high taxes and a lack of self-government",
+      "Because they wanted to join France",
+      "Because Britain refused to trade with them",
+      "Because Britain banned colonial elections entirely"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "Colonists objected to taxation without representation and a lack of self-government, among other grievances against British rule.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "When was the Constitution written?",
+    "options": [
+      "1776",
+      "1787",
+      "1791",
+      "1803"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "The Constitutional Convention drafted the U.S. Constitution in Philadelphia in 1787.",
+    "difficulty": "hard",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "Who is the “Father of Our Country”?",
+    "options": [
+      "Thomas Jefferson",
+      "Benjamin Franklin",
+      "George Washington",
+      "John Adams"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "George Washington, the first U.S. President and commander of the Continental Army, is known as the “Father of Our Country.”",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "Who was the first President?",
+    "options": [
+      "John Adams",
+      "Thomas Jefferson",
+      "James Madison",
+      "George Washington"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "George Washington served as the first President of the United States, from 1789 to 1797.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "What territory did the United States buy from France in 1803?",
+    "options": [
+      "The Louisiana Territory",
+      "The Oregon Territory",
+      "Florida",
+      "Alaska"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "The Louisiana Purchase of 1803 roughly doubled the size of the United States by acquiring land from France.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "Name the U.S. war between the North and the South.",
+    "options": [
+      "The Revolutionary War",
+      "The Civil War",
+      "World War I",
+      "The War of 1812"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "The Civil War (1861–1865) was fought between the Union (North) and the Confederacy (South).",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "Name one problem that led to the Civil War.",
+    "options": [
+      "Foreign trade tariffs with Canada",
+      "A dispute over the national anthem",
+      "Slavery",
+      "The location of the capital"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "Slavery, along with related economic and states' rights disputes, was a central cause of the Civil War.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "What was one important thing that Abraham Lincoln did?",
+    "options": [
+      "Wrote the Constitution",
+      "Led the Continental Army",
+      "Purchased the Louisiana Territory",
+      "Freed the slaves through the Emancipation Proclamation"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "Abraham Lincoln issued the Emancipation Proclamation in 1863 and led the Union through the Civil War, preserving the nation.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "What did the Emancipation Proclamation do?",
+    "options": [
+      "Freed slaves in the Confederate states",
+      "Ended World War I",
+      "Established the Bill of Rights",
+      "Created the Civil Rights Act"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "Issued by Abraham Lincoln in 1863, the Emancipation Proclamation declared enslaved people in Confederate-held territory to be free.",
+    "difficulty": "medium",
+    "source": "The Emancipation Proclamation, 1863"
+  },
+  {
+    "category": "American History",
+    "questionText": "Who was President during the Great Depression and World War II?",
+    "options": [
+      "Herbert Hoover",
+      "Franklin Roosevelt",
+      "Harry Truman",
+      "Woodrow Wilson"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "Franklin D. Roosevelt served as President from 1933 to 1945, leading the country through the Great Depression and most of World War II.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "Who did the United States fight in World War II?",
+    "options": [
+      "Great Britain and France",
+      "China and the Soviet Union",
+      "Japan, Germany, and Italy",
+      "Mexico and Spain"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "In World War II, the United States and its Allies fought against the Axis powers: Japan, Germany, and Italy.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "During the Cold War, what was the main concern of the United States?",
+    "options": [
+      "Colonization",
+      "Trade tariffs",
+      "Immigration reform",
+      "Communism"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "During the Cold War, the United States' primary concern was the spread of communism, especially from the Soviet Union.",
+    "difficulty": "hard",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "What did Martin Luther King, Jr. do?",
+    "options": [
+      "Fought for civil rights and equality for all Americans",
+      "Wrote the Emancipation Proclamation",
+      "Served as a U.S. President",
+      "Led the Continental Congress"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "Martin Luther King, Jr. was a leader of the civil rights movement who worked for racial equality through nonviolent activism.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "American History",
+    "questionText": "What major event happened on September 11, 2001, in the United States?",
+    "options": [
+      "The Cold War ended",
+      "Terrorists attacked the United States",
+      "The Civil Rights Act was signed",
+      "The Louisiana Purchase was completed"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "On September 11, 2001, terrorists hijacked commercial airplanes and attacked the World Trade Center and the Pentagon.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "What is the capital of the United States?",
+    "options": [
+      "New York City",
+      "Philadelphia",
+      "Washington, D.C.",
+      "Boston"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "Washington, D.C. has been the capital of the United States since 1800.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "What ocean is on the West Coast of the United States?",
+    "options": [
+      "Atlantic Ocean",
+      "Indian Ocean",
+      "Arctic Ocean",
+      "Pacific Ocean"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "The Pacific Ocean borders the western coast of the United States, including California, Oregon, and Washington.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "What ocean is on the East Coast of the United States?",
+    "options": [
+      "Atlantic Ocean",
+      "Pacific Ocean",
+      "Indian Ocean",
+      "Gulf of Mexico"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "The Atlantic Ocean borders the eastern coast of the United States.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "Name one of the two longest rivers in the United States.",
+    "options": [
+      "The Colorado River",
+      "The Mississippi River",
+      "The Rio Grande",
+      "The Hudson River"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "The Mississippi River and the Missouri River are the two longest rivers in the United States.",
+    "difficulty": "hard",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "Name one U.S. territory.",
+    "options": [
+      "Cuba",
+      "Bermuda",
+      "Puerto Rico",
+      "The Bahamas"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "Puerto Rico is a U.S. territory, along with Guam, American Samoa, the U.S. Virgin Islands, and the Northern Mariana Islands.",
+    "difficulty": "hard",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "Name one state that borders Canada.",
+    "options": [
+      "Ohio",
+      "Nevada",
+      "Colorado",
+      "Michigan"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "Several states border Canada, including Michigan, New York, Washington, Maine, and Montana.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "Name one state that borders Mexico.",
+    "options": [
+      "Texas",
+      "Georgia",
+      "Nevada",
+      "Utah"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "Texas, along with California, Arizona, and New Mexico, borders Mexico.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "Where is the Statue of Liberty located?",
+    "options": [
+      "Boston Harbor",
+      "New York Harbor",
+      "Chesapeake Bay",
+      "San Francisco Bay"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "The Statue of Liberty stands on Liberty Island in New York Harbor.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "Why does the flag have 13 stripes?",
+    "options": [
+      "Because there are 13 branches of government",
+      "Because 13 states signed the Constitution first",
+      "Because there were 13 original colonies",
+      "Because it represents 13 amendments"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "The 13 stripes on the American flag represent the 13 original colonies that became the first states.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "Why does the flag have 50 stars?",
+    "options": [
+      "Because there were 50 original colonies",
+      "Because it represents 50 amendments",
+      "Because there are 50 Senators",
+      "Because there is one star for each state"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "The 50 stars on the flag represent the 50 states of the Union, one star per state.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "What is the name of the national anthem?",
+    "options": [
+      "The Star-Spangled Banner",
+      "America the Beautiful",
+      "God Bless America",
+      "My Country, 'Tis of Thee"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "“The Star-Spangled Banner,” written by Francis Scott Key, has been the U.S. national anthem since 1931.",
+    "difficulty": "medium",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "When do we celebrate Independence Day?",
+    "options": [
+      "June 14",
+      "July 4",
+      "September 4",
+      "May 30"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "Independence Day is celebrated on July 4, marking the adoption of the Declaration of Independence in 1776.",
+    "difficulty": "easy",
+    "source": "USCIS Civics Test (2008 version)"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "Which of these is a U.S. federal holiday?",
+    "options": [
+      "Halloween",
+      "Valentine's Day",
+      "Thanksgiving",
+      "St. Patrick's Day"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "Thanksgiving, celebrated on the fourth Thursday in November, is one of the eleven federal holidays established by law.",
+    "difficulty": "medium",
+    "source": "5 U.S.C. § 6103"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "Which federal holiday honors U.S. military veterans?",
+    "options": [
+      "Memorial Day",
+      "Labor Day",
+      "Flag Day",
+      "Veterans Day"
+    ],
+    "correctAnswerIndex": 3,
+    "explanation": "Veterans Day, observed on November 11, honors all who have served in the U.S. armed forces.",
+    "difficulty": "medium",
+    "source": "5 U.S.C. § 6103"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "Which federal holiday honors U.S. military members who died in service?",
+    "options": [
+      "Memorial Day",
+      "Veterans Day",
+      "Independence Day",
+      "Labor Day"
+    ],
+    "correctAnswerIndex": 0,
+    "explanation": "Memorial Day, observed on the last Monday in May, honors military service members who died while serving.",
+    "difficulty": "medium",
+    "source": "5 U.S.C. § 6103"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "In what month is Labor Day observed in the United States?",
+    "options": [
+      "May",
+      "September",
+      "July",
+      "November"
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "Labor Day is observed on the first Monday in September and honors the American labor movement.",
+    "difficulty": "hard",
+    "source": "5 U.S.C. § 6103"
+  },
+  {
+    "category": "Integrated Civics",
+    "questionText": "What is the first day of the new year called?",
+    "options": [
+      "Independence Day",
+      "Presidents Day",
+      "New Year's Day",
+      "Thanksgiving"
+    ],
+    "correctAnswerIndex": 2,
+    "explanation": "New Year's Day, celebrated on January 1, is a federal holiday marking the start of the calendar year.",
+    "difficulty": "easy",
+    "source": "5 U.S.C. § 6103"
   }
 ]

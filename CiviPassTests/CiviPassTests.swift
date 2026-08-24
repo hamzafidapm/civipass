@@ -23,13 +23,16 @@ struct CiviPassTests {
         try QuestionRepository.seedIfNeeded(context: context)
 
         let total = try context.fetchCount(FetchDescriptor<Question>())
-        #expect(total == 10)
+        #expect(total == 51)
 
         let government = try QuestionRepository.questions(in: .americanGovernment, context: context)
-        #expect(government.count == 5)
+        #expect(government.count == 17)
 
         let history = try QuestionRepository.questions(in: .americanHistory, context: context)
-        #expect(history.count == 5)
+        #expect(history.count == 17)
+
+        let civics = try QuestionRepository.questions(in: .integratedCivics, context: context)
+        #expect(civics.count == 17)
 
         let quizSet = try QuestionRepository.randomQuizSet(count: 4, context: context)
         #expect(quizSet.count == 4)
@@ -37,7 +40,7 @@ struct CiviPassTests {
         // Seeding again must not duplicate — it's a no-op once the store is non-empty.
         try QuestionRepository.seedIfNeeded(context: context)
         let totalAfterRerun = try context.fetchCount(FetchDescriptor<Question>())
-        #expect(totalAfterRerun == 10)
+        #expect(totalAfterRerun == 51)
     }
 
     @Test func quizScoringCountsCorrectAnswers() {
