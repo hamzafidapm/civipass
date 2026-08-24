@@ -55,4 +55,30 @@ jobs:
             -project CiviPass.xcodeproj \
             -scheme CiviPass \
             -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device_name }}" \
+            -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO
+
+      # Runs even if the Test step failed above — a screenshot from a failing run is
+      # still useful, and this step must never be what fails the whole CI job.
+      - name: Extract UI test screenshots
+        if: always()
+        run: |
+          mkdir -p screenshots
+          if [ -d "TestResults.xcresult" ]; then
+            xcrun xcresulttool export attachments \
+              --path TestResults.xcresult \
+              --output-path screenshots \
+              || echo "xcresulttool export attachments failed (subcommand may differ on this Xcode version) — screenshots may be missing."
+          else
+            echo "No TestResults.xcresult bundle found; skipping screenshot extraction."
+          fi
+          ls -la screenshots || true
+
+      - name: Upload UI test screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-test-screenshots
+          path: screenshots
+          if-no-files-found: warn
+          retention-days: 14

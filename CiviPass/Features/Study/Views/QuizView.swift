@@ -101,6 +101,9 @@ private struct QuizQuestionView: View {
                         ) {
                             viewModel.selectAnswer(index)
                         }
+                        // Option text is randomized seed content, so UI tests can't target
+                        // it by label — this identifier gives them a stable hook.
+                        .accessibilityIdentifier("answerOption\(index)")
                     }
                 }
 
