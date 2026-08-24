@@ -1,0 +1,76 @@
+name: CiviPass
+
+options:
+  bundleIdPrefix: com.civipass
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+configs:
+  Debug: debug
+  Release: release
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    GENERATE_INFOPLIST_FILE: YES
+    INFOPLIST_KEY_CFBundleDisplayName: "CiviPass"
+    INFOPLIST_KEY_UILaunchScreen_Generation: YES
+    INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    TARGETED_DEVICE_FAMILY: "1"
+    SWIFT_STRICT_CONCURRENCY: minimal
+
+targets:
+  CiviPass:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: CiviPass
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.civipass.app
+
+  CiviPassTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: CiviPassTests
+    dependencies:
+      - target: CiviPass
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.civipass.app.tests
+
+  CiviPassUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: CiviPassUITests
+    dependencies:
+      - target: CiviPass
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.civipass.app.uitests
+
+schemes:
+  CiviPass:
+    build:
+      targets:
+        CiviPass: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - CiviPassTests
+        - CiviPassUITests
+    archive:
+      config: Release

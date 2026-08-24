@@ -1,0 +1,40 @@
+# XcodeGen-generated project — regenerated from project.yml, never commit
+CiviPass.xcodeproj/
+*.xcworkspace/
+
+# Xcode user/state files
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+# Build products
+DerivedData/
+build/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# CocoaPods / Carthage (not used, but ignored defensively)
+Pods/
+Carthage/Build/
+
+# macOS
+.DS_Store
+
+# OneDrive sync artifacts / conflict copies
+*.tmp
+~$*
+*-conflict-*
+*(conflicted copy)*
+
+# Secrets / local overrides
+*.xcconfig.local
+.env
+.env.local
