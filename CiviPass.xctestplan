@@ -10,6 +10,7 @@
   ],
   "defaultOptions" : {
     "diagnosticCollectionPolicy" : "always",
+    "collectVideoDiagnostics" : true,
     "videoCollectionPolicy" : "always"
   },
   "testTargets" : [

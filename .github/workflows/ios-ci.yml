@@ -51,25 +51,37 @@ jobs:
       - name: Test
         run: |
           set -o pipefail
-          # Ask for diagnostics (screen recordings included) on every test, not just
-          # failures — but only if this Xcode actually supports the flag, so a wrong
-          # guess here can't break the whole test run. Introduced in Xcode 15; the
-          # example CiviPass.xctestplan at the repo root documents the same intent for
-          # anyone opening the project directly in Xcode, though its exact diagnostics
-          # schema/target IDs are unverified and may need adjusting there too.
-          DIAGNOSTICS_FLAG=""
-          if xcodebuild -help 2>&1 | grep -q -- "-collect-test-diagnostics"; then
-            DIAGNOSTICS_FLAG="-collect-test-diagnostics always"
-            echo "xcodebuild supports -collect-test-diagnostics; requesting diagnostics (including video) for all tests."
+          # xcodebuild's -collect-test-diagnostics only accepts "on-failure" or "never"
+          # (confirmed by a real CI failure) — it cannot express "always", and passing
+          # it would override a test plan's own diagnostics policy anyway. Video
+          # collection is instead controlled by CiviPass.xctestplan's Diagnostics
+          # settings (set to collect on every run, not just failures).
+          #
+          # -testPlan requires the scheme to actually list the plan as available, which
+          # depends on xcodegen having wired project.yml's testPlans: key correctly —
+          # unverified from here. -showTestPlans is a read-only query (no tests run),
+          # so probing it first can't mask a real test failure: if the plan isn't
+          # recognized, we just run without it instead of failing the whole step.
+          USE_TEST_PLAN=false
+          if xcodebuild -showTestPlans -project CiviPass.xcodeproj -scheme CiviPass 2>&1 \
+              | grep -v "associated with" | grep -q "CiviPass"; then
+            USE_TEST_PLAN=true
+            echo "Scheme reports CiviPass.xctestplan is available; using -testPlan CiviPass so its Diagnostics settings (including always-on video) take effect."
           else
-            echo "xcodebuild does not report -collect-test-diagnostics support on this Xcode version; running without it (no video capture)."
+            echo "Scheme does not report CiviPass.xctestplan as an available test plan (xcodegen may not have wired it, or -showTestPlans isn't supported here) — running without -testPlan. No video will be collected this run."
           fi
+
+          TEST_PLAN_FLAG=""
+          if [ "$USE_TEST_PLAN" = true ]; then
+            TEST_PLAN_FLAG="-testPlan CiviPass"
+          fi
+
           xcodebuild test \
             -project CiviPass.xcodeproj \
             -scheme CiviPass \
             -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device_name }}" \
             -resultBundlePath TestResults.xcresult \
-            $DIAGNOSTICS_FLAG \
+            $TEST_PLAN_FLAG \
             CODE_SIGNING_ALLOWED=NO
 
       # Runs even if the Test step failed above — a screenshot from a failing run is

@@ -69,8 +69,8 @@ schemes:
       config: Debug
     test:
       config: Debug
-      targets:
-        - CiviPassTests
-        - CiviPassUITests
+      testPlans:
+        - path: CiviPass.xctestplan
+          defaultPlan: true
     archive:
       config: Release
