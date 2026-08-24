@@ -10,7 +10,12 @@ struct MainTabView: View {
             ForEach(AppTab.allCases) { tab in
                 tabContent(for: tab)
                     .tabItem {
+                        // Identifier goes on the tabItem's own Label (not the content view
+                        // below) since this is what SwiftUI builds the tab's UITabBarItem
+                        // from — the thing iOS's auto-generated "More" overflow list reads
+                        // title/icon from when a tab doesn't fit in the visible bar.
                         Label(tab.title, systemImage: tab.systemImage)
+                            .accessibilityIdentifier("moreMenuRow.\(tab.rawValue)")
                     }
                     .tag(tab)
                     .accessibilityIdentifier("tab.\(tab.rawValue)")

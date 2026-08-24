@@ -36,17 +36,12 @@ final class CiviPassScreenshotUITests: XCTestCase {
 
         // AppTab has 6 cases, and iOS's tab bar auto-collapses everything past the
         // first 4 into a system-generated "More" list — Progress isn't a directly
-        // tappable top-level tab. That list's rows are built entirely by
-        // UITabBarController internals, not by any SwiftUI view of ours, so there's
-        // no accessibilityIdentifier of ours to attach to the row itself; its label
-        // ("Progress") comes straight from AppTab.progress.title, not a guess.
+        // tappable top-level tab.
         tapButton(app.tabBars.buttons, labelContains: "More")
-        if !tapButton(app.cells, labelContains: "Progress") {
-            _ = tapButton(app.buttons, labelContains: "Progress")
-        }
-        // Confirm the Progress screen's own content actually loaded before capturing.
-        // This check is what would have caught the wrong-screen bug immediately
-        // instead of letting it pass silently.
+        tapMoreMenuProgressRow(app)
+        // Confirm the actual Progress dashboard loaded (not just the More menu we came
+        // from) before capturing — both its populated and empty states share this
+        // navigation title, so it's a reliable signal regardless of quiz history.
         _ = app.navigationBars["Progress"].waitForExistence(timeout: 5)
         attach(app, named: "05-progress")
 
@@ -68,6 +63,24 @@ final class CiviPassScreenshotUITests: XCTestCase {
         guard element.waitForExistence(timeout: timeout) else { return false }
         element.tap()
         return true
+    }
+
+    /// Taps the "Progress" row in iOS's auto-generated "More" overflow list. Its rows are
+    /// built by UITabBarController internals, not any SwiftUI view of ours, so we can't be
+    /// certain what element type XCUITest classifies them as (an earlier attempt matching
+    /// app.cells / app.buttons specifically found nothing). Tries the identifier we added
+    /// to the tab's Label first, then falls back to a type-agnostic label search so a
+    /// classification guess can't silently strand the test on the More menu again.
+    @discardableResult
+    private func tapMoreMenuProgressRow(_ app: XCUIApplication) -> Bool {
+        if tapElement(app.descendants(matching: .any)["moreMenuRow.progress"], timeout: 3) {
+            return true
+        }
+        let labelMatch = NSPredicate(format: "label CONTAINS[c] %@", "Progress")
+        if tapElement(app.tables.descendants(matching: .any).matching(labelMatch).firstMatch, timeout: 3) {
+            return true
+        }
+        return tapElement(app.descendants(matching: .any).matching(labelMatch).firstMatch, timeout: 3)
     }
 
     // MARK: - Screenshot capture
