@@ -107,4 +107,18 @@ struct CiviPassTests {
         #expect(ProgressStats.currentStreak(attemptsWithGapToday, today: today, calendar: calendar) == 0)
         #expect(ProgressStats.currentStreak([], today: today, calendar: calendar) == 0)
     }
+
+    // Uses a plain injected Bool, not a real EntitlementManager/StoreKit purchase — the
+    // gating decision itself is pure and shouldn't need network or purchase infrastructure to test.
+    @Test func lockedCategoriesRequirePremiumAccess() {
+        #expect(AccessGate.isLocked(.americanGovernment, hasPremiumAccess: false) == false)
+        #expect(AccessGate.isLocked(.americanHistory, hasPremiumAccess: false) == true)
+        #expect(AccessGate.isLocked(.integratedCivics, hasPremiumAccess: false) == true)
+
+        #expect(AccessGate.isLocked(.americanGovernment, hasPremiumAccess: true) == false)
+        #expect(AccessGate.isLocked(.americanHistory, hasPremiumAccess: true) == false)
+        #expect(AccessGate.isLocked(.integratedCivics, hasPremiumAccess: true) == false)
+
+        #expect(AccessGate.isLocked(nil, hasPremiumAccess: false) == false)
+    }
 }

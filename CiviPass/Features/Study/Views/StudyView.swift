@@ -3,6 +3,7 @@ import SwiftData
 
 struct StudyView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(EntitlementManager.self) private var entitlementManager
     @State private var viewModel = StudyViewModel()
 
     var body: some View {
@@ -62,22 +63,65 @@ struct StudyView: View {
                 systemImage: "exclamationmark.triangle",
                 description: Text(errorMessage)
             )
-        } else if viewModel.questions.isEmpty {
+        } else if AccessGate.isLocked(viewModel.selectedCategory, hasPremiumAccess: entitlementManager.hasPremiumAccess) {
+            PaywallView()
+        } else if visibleQuestions.isEmpty {
             ContentUnavailableView(
                 "No Questions Yet",
                 systemImage: "book.closed"
             )
         } else {
-            List(viewModel.questions, id: \.id) { question in
-                QuestionCardView(question: question)
-                    .listRowInsets(EdgeInsets(top: CPSpacing.xs, leading: CPSpacing.md, bottom: CPSpacing.xs, trailing: CPSpacing.md))
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
+            List {
+                if showsUpgradeBanner {
+                    upgradeBanner
+                        .listRowInsets(EdgeInsets(top: CPSpacing.xs, leading: CPSpacing.md, bottom: CPSpacing.xs, trailing: CPSpacing.md))
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                }
+                ForEach(visibleQuestions, id: \.id) { question in
+                    QuestionCardView(question: question)
+                        .listRowInsets(EdgeInsets(top: CPSpacing.xs, leading: CPSpacing.md, bottom: CPSpacing.xs, trailing: CPSpacing.md))
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                }
             }
             .listStyle(.plain)
             .scrollContentBackground(.hidden)
             .background(CPColor.background)
         }
+    }
+
+    /// "All" never reveals locked-category content to free users — it's quietly
+    /// narrowed to the free category rather than leaking premium questions.
+    private var visibleQuestions: [Question] {
+        guard viewModel.selectedCategory == nil, !entitlementManager.hasPremiumAccess else {
+            return viewModel.questions
+        }
+        return viewModel.questions.filter { $0.category == AccessGate.freeCategory }
+    }
+
+    private var showsUpgradeBanner: Bool {
+        viewModel.selectedCategory == nil && !entitlementManager.hasPremiumAccess
+    }
+
+    private var upgradeBanner: some View {
+        NavigationLink {
+            PaywallView()
+        } label: {
+            HStack {
+                Image(systemName: "lock.fill")
+                Text("Unlock American History & Integrated Civics")
+                    .font(CPTypography.caption)
+                Spacer()
+                Image(systemName: "chevron.right")
+            }
+            .foregroundStyle(CPColor.brandAccent)
+            .padding(CPSpacing.sm)
+            .frame(maxWidth: .infinity)
+            .background(CPColor.brandAccent.opacity(0.12))
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        }
+        .buttonStyle(.plain)
     }
 }
 
@@ -146,4 +190,5 @@ private struct QuestionCardView: View {
 #Preview {
     StudyView()
         .modelContainer(PersistenceController.previewModelContainer)
+        .environment(EntitlementManager())
 }

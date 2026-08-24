@@ -3,6 +3,7 @@ import SwiftData
 
 struct QuizView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(EntitlementManager.self) private var entitlementManager
     @State private var viewModel = QuizViewModel()
     @State private var hasStarted = false
 
@@ -17,11 +18,9 @@ struct QuizView: View {
                     description: Text(errorMessage)
                 )
             } else if viewModel.isFinished {
-                QuizSummaryView(viewModel: viewModel) {
-                    viewModel.start(context: modelContext, count: questionCount)
-                }
+                QuizSummaryView(viewModel: viewModel, onRestart: startQuiz)
             } else if let question = viewModel.currentQuestion {
-                QuizQuestionView(viewModel: viewModel, question: question)
+                QuizQuestionView(viewModel: viewModel, question: question, isFreeTierQuiz: !entitlementManager.hasPremiumAccess)
             } else {
                 ProgressView()
             }
@@ -31,12 +30,23 @@ struct QuizView: View {
         .task {
             guard !hasStarted else { return }
             hasStarted = true
-            viewModel.start(context: modelContext, count: questionCount)
+            startQuiz()
         }
         .onChange(of: viewModel.isFinished) {
             guard viewModel.isFinished, !viewModel.questions.isEmpty else { return }
             saveCompletedAttempt()
         }
+    }
+
+    /// Free users only ever draw from the unlocked category — a mixed quiz would
+    /// otherwise leak American History / Integrated Civics content for free.
+    private func startQuiz() {
+        guard entitlementManager.hasPremiumAccess else {
+            let freeQuestions = (try? QuestionRepository.questions(in: AccessGate.freeCategory, context: modelContext)) ?? []
+            viewModel.configure(with: Array(freeQuestions.shuffled().prefix(questionCount)))
+            return
+        }
+        viewModel.start(context: modelContext, count: questionCount)
     }
 
     private func saveCompletedAttempt() {
@@ -55,6 +65,7 @@ struct QuizView: View {
 private struct QuizQuestionView: View {
     let viewModel: QuizViewModel
     let question: Question
+    let isFreeTierQuiz: Bool
 
     private var progressFraction: Double {
         guard !viewModel.questions.isEmpty else { return 0 }
@@ -67,9 +78,14 @@ private struct QuizQuestionView: View {
                 VStack(alignment: .leading, spacing: CPSpacing.xs) {
                     ProgressView(value: progressFraction)
                         .tint(CPColor.brandPrimary)
-                    Text(viewModel.progressText)
-                        .font(CPTypography.caption)
-                        .foregroundStyle(.secondary)
+                    HStack {
+                        Text(viewModel.progressText)
+                        if isFreeTierQuiz {
+                            Text("· Free quiz: American Government")
+                        }
+                    }
+                    .font(CPTypography.caption)
+                    .foregroundStyle(.secondary)
                 }
 
                 Text(question.questionText)
@@ -165,5 +181,6 @@ private struct QuizSummaryView: View {
     NavigationStack {
         QuizView()
             .modelContainer(PersistenceController.previewModelContainer)
+            .environment(EntitlementManager())
     }
 }

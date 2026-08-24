@@ -33,5 +33,6 @@ struct MainTabView: View {
 #Preview {
     MainTabView()
         .environment(AppState())
+        .environment(EntitlementManager())
         .modelContainer(PersistenceController.previewModelContainer)
 }
