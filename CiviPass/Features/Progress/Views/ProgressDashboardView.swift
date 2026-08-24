@@ -6,6 +6,8 @@ struct ProgressDashboardView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var viewModel = ProgressViewModel()
 
+    private let columns = [GridItem(.flexible(), spacing: CPSpacing.md), GridItem(.flexible(), spacing: CPSpacing.md)]
+
     var body: some View {
         NavigationStack {
             Group {
@@ -18,25 +20,47 @@ struct ProgressDashboardView: View {
                 } else if viewModel.summary.totalQuizzes == 0 {
                     ContentUnavailableView(
                         "No Quizzes Yet",
-                        systemImage: "chart.bar",
+                        systemImage: "chart.bar.xaxis",
                         description: Text("Complete a mock quiz to start tracking your progress.")
                     )
                 } else {
-                    List {
-                        Section {
-                            statRow(title: "Quizzes Taken", value: "\(viewModel.summary.totalQuizzes)")
-                            statRow(title: "Overall Accuracy", value: percentString(viewModel.summary.overallAccuracy))
-                            statRow(title: "Current Streak", value: streakText)
-                        }
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: CPSpacing.lg) {
+                            LazyVGrid(columns: columns, spacing: CPSpacing.md) {
+                                StatCard(
+                                    title: "Quizzes Taken",
+                                    value: "\(viewModel.summary.totalQuizzes)",
+                                    systemImage: "checkmark.circle.fill",
+                                    tint: CPColor.brandPrimary
+                                )
+                                StatCard(
+                                    title: "Overall Accuracy",
+                                    value: percentString(viewModel.summary.overallAccuracy),
+                                    systemImage: "target",
+                                    tint: CPColor.success
+                                )
+                                StatCard(
+                                    title: "Current Streak",
+                                    value: "\(viewModel.summary.currentStreakDays)",
+                                    systemImage: "flame.fill",
+                                    tint: CPColor.brandAccent
+                                )
+                            }
 
-                        if !viewModel.summary.categoryBreakdown.isEmpty {
-                            Section("By Category") {
-                                ForEach(viewModel.summary.categoryBreakdown) { breakdown in
-                                    statRow(title: breakdown.displayName, value: percentString(breakdown.accuracy))
+                            VStack(alignment: .leading, spacing: CPSpacing.sm) {
+                                Text("By Category")
+                                    .font(CPTypography.headline)
+
+                                VStack(spacing: CPSpacing.sm) {
+                                    ForEach(categoryRows) { row in
+                                        CategoryRow(title: row.title, breakdown: row.breakdown)
+                                    }
                                 }
                             }
                         }
+                        .padding(CPSpacing.md)
                     }
+                    .background(CPColor.background)
                 }
             }
             .navigationTitle("Progress")
@@ -49,20 +73,69 @@ struct ProgressDashboardView: View {
         }
     }
 
-    private var streakText: String {
-        let days = viewModel.summary.currentStreakDays
-        return "\(days) day\(days == 1 ? "" : "s")"
+    /// Always shows Mixed + every StudyCategory, even ones with no attempts yet,
+    /// so the screen reads as "not started" rather than silently omitting them.
+    private var categoryRows: [CategoryStatRow] {
+        var rows = [
+            CategoryStatRow(
+                id: "mixed",
+                title: "Mixed Quizzes",
+                breakdown: viewModel.summary.categoryBreakdown.first { $0.category == nil }
+            )
+        ]
+        rows += StudyCategory.allCases.map { category in
+            CategoryStatRow(
+                id: category.rawValue,
+                title: category.rawValue,
+                breakdown: viewModel.summary.categoryBreakdown.first { $0.category == category }
+            )
+        }
+        return rows
     }
 
-    private func statRow(title: String, value: String) -> some View {
+    private func percentString(_ value: Double) -> String {
+        "\(Int((value * 100).rounded()))%"
+    }
+}
+
+private struct CategoryStatRow: Identifiable {
+    let id: String
+    let title: String
+    let breakdown: ProgressStats.CategoryBreakdown?
+}
+
+private struct CategoryRow: View {
+    let title: String
+    let breakdown: ProgressStats.CategoryBreakdown?
+
+    var body: some View {
         HStack {
-            Text(title)
-                .font(CPTypography.body)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(CPTypography.body)
+                if let breakdown {
+                    Text("\(breakdown.attemptCount) quiz\(breakdown.attemptCount == 1 ? "" : "zes")")
+                        .font(CPTypography.footnote)
+                        .foregroundStyle(.secondary)
+                } else {
+                    Text("No attempts yet")
+                        .font(CPTypography.footnote)
+                        .foregroundStyle(.tertiary)
+                }
+            }
             Spacer()
-            Text(value)
-                .font(CPTypography.body.bold())
-                .foregroundStyle(.secondary)
+            if let breakdown {
+                Text(percentString(breakdown.accuracy))
+                    .font(CPTypography.body.bold())
+                    .foregroundStyle(.secondary)
+            } else {
+                Image(systemName: "circle.dashed")
+                    .foregroundStyle(.tertiary)
+            }
         }
+        .padding(CPSpacing.md)
+        .background(CPColor.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
     private func percentString(_ value: Double) -> String {

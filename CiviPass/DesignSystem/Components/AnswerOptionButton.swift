@@ -18,17 +18,24 @@ struct AnswerOptionButton: View {
                 if isRevealed && isCorrectAnswer {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundStyle(CPColor.success)
+                        .transition(.scale.combined(with: .opacity))
                 } else if isRevealed && isSelected {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundStyle(CPColor.danger)
+                        .transition(.scale.combined(with: .opacity))
                 }
             }
             .padding(CPSpacing.sm)
             .background(backgroundColor)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .strokeBorder(borderColor, lineWidth: isRevealed ? 1.5 : 0)
+            )
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
         .buttonStyle(.plain)
         .disabled(isRevealed)
+        .animation(.easeInOut(duration: 0.2), value: isRevealed)
     }
 
     private var backgroundColor: Color {
@@ -36,6 +43,13 @@ struct AnswerOptionButton: View {
         if isCorrectAnswer { return CPColor.success.opacity(0.15) }
         if isSelected { return CPColor.danger.opacity(0.15) }
         return CPColor.secondaryBackground
+    }
+
+    private var borderColor: Color {
+        guard isRevealed else { return .clear }
+        if isCorrectAnswer { return CPColor.success }
+        if isSelected { return CPColor.danger }
+        return .clear
     }
 }
 

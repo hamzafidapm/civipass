@@ -1,12 +1,15 @@
 import SwiftUI
 
-/// CiviPass brand and semantic color tokens.
+/// CiviPass brand and semantic color tokens. Brand colors are defined in the asset
+/// catalog (BrandPrimary/BrandAccent) with distinct light/dark appearances so they
+/// stay legible in both modes rather than using one fixed RGB value everywhere.
 enum CPColor {
-    static let brandPrimary = Color(red: 0.05, green: 0.15, blue: 0.35)
-    static let brandAccent = Color(red: 0.72, green: 0.55, blue: 0.12)
+    static let brandPrimary = Color("BrandPrimary")
+    static let brandAccent = Color("BrandAccent")
 
     static let background = Color(.systemBackground)
     static let secondaryBackground = Color(.secondarySystemBackground)
+    static let cardBackground = Color(.secondarySystemGroupedBackground)
 
     static let success = Color.green
     static let warning = Color.orange

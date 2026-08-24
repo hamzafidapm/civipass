@@ -70,8 +70,13 @@ struct StudyView: View {
         } else {
             List(viewModel.questions, id: \.id) { question in
                 QuestionCardView(question: question)
+                    .listRowInsets(EdgeInsets(top: CPSpacing.xs, leading: CPSpacing.md, bottom: CPSpacing.xs, trailing: CPSpacing.md))
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+            .background(CPColor.background)
         }
     }
 }
@@ -84,13 +89,18 @@ private struct QuestionCardView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: CPSpacing.sm) {
             Button {
-                isExpanded.toggle()
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    isExpanded.toggle()
+                }
             } label: {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: CPSpacing.xs) {
-                        Text(question.category.rawValue)
-                            .font(CPTypography.caption)
-                            .foregroundStyle(.secondary)
+                        HStack(spacing: CPSpacing.xs) {
+                            Text(question.category.rawValue)
+                                .font(CPTypography.caption)
+                                .foregroundStyle(.secondary)
+                            DifficultyBadge(difficulty: question.difficulty)
+                        }
                         Text(question.questionText)
                             .font(CPTypography.body)
                             .foregroundStyle(.primary)
@@ -124,9 +134,12 @@ private struct QuestionCardView: View {
                             .padding(.top, CPSpacing.xs)
                     }
                 }
+                .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
-        .padding(.vertical, CPSpacing.xs)
+        .padding(CPSpacing.md)
+        .background(CPColor.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 }
 
