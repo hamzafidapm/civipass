@@ -1,0 +1,84 @@
+[
+  {
+    "category": "American Government",
+    "questionText": "Placeholder question: What is the supreme law of the land?",
+    "options": ["The Constitution", "The Declaration of Independence", "The Bill of Rights", "Federal law"],
+    "correctAnswerIndex": 0,
+    "explanation": "Placeholder explanation: the Constitution establishes the framework of the federal government.",
+    "difficulty": "easy",
+    "source": "Placeholder source citation 1"
+  },
+  {
+    "category": "American Government",
+    "questionText": "Placeholder question: How many branches does the federal government have?",
+    "options": ["Two", "Three", "Four", "Five"],
+    "correctAnswerIndex": 1,
+    "explanation": "Placeholder explanation: legislative, executive, and judicial.",
+    "difficulty": "medium"
+  },
+  {
+    "category": "American Government",
+    "questionText": "Placeholder question: What stops one branch of government from becoming too powerful?",
+    "options": ["Elections", "Checks and balances", "The military"],
+    "correctAnswerIndex": 1,
+    "difficulty": "hard"
+  },
+  {
+    "category": "American Government",
+    "questionText": "Placeholder question: Who is Commander in Chief of the military?",
+    "options": ["The Speaker of the House", "The President", "The Chief Justice", "The Secretary of Defense"],
+    "correctAnswerIndex": 1,
+    "explanation": "Placeholder explanation: the President holds this constitutional role.",
+    "difficulty": "easy"
+  },
+  {
+    "category": "American Government",
+    "questionText": "Placeholder question: What do we call the first ten amendments to the Constitution?",
+    "options": ["The Preamble", "The Federalist Papers", "The Bill of Rights", "The Articles of Confederation", "The Emancipation Proclamation", "The Gettysburg Address"],
+    "correctAnswerIndex": 2,
+    "explanation": "Placeholder explanation: these ten amendments protect individual rights.",
+    "difficulty": "medium",
+    "source": "Placeholder source citation 2"
+  },
+  {
+    "category": "American History",
+    "questionText": "Placeholder question: What year was the Declaration of Independence adopted?",
+    "options": ["1492", "1776", "1789", "1812"],
+    "correctAnswerIndex": 1,
+    "explanation": "Placeholder explanation: adopted on July 4, 1776.",
+    "difficulty": "easy",
+    "source": "Placeholder source citation 3"
+  },
+  {
+    "category": "American History",
+    "questionText": "Placeholder true/false: George Washington was the first President of the United States.",
+    "options": ["True", "False"],
+    "correctAnswerIndex": 0,
+    "difficulty": "easy"
+  },
+  {
+    "category": "American History",
+    "questionText": "Placeholder question: What territory did the United States buy from France in 1803?",
+    "options": ["Alaska", "Louisiana Territory", "Texas", "Florida"],
+    "correctAnswerIndex": 1,
+    "explanation": "Placeholder explanation: the Louisiana Purchase roughly doubled the size of the United States.",
+    "difficulty": "medium"
+  },
+  {
+    "category": "American History",
+    "questionText": "Placeholder question: Name one war fought by the United States in the 1900s.",
+    "options": ["World War I", "The Napoleonic Wars", "The War of the Roses", "The Crimean War"],
+    "correctAnswerIndex": 0,
+    "difficulty": "hard",
+    "source": "Placeholder source citation 4"
+  },
+  {
+    "category": "American History",
+    "questionText": "Placeholder question: Who was President during the Great Depression and World War II?",
+    "options": ["Herbert Hoover", "Franklin Roosevelt", "Harry Truman", "Dwight Eisenhower"],
+    "correctAnswerIndex": 1,
+    "explanation": "Placeholder explanation: Franklin Roosevelt served an unprecedented four terms.",
+    "difficulty": "medium",
+    "source": "Placeholder source citation 5"
+  }
+]

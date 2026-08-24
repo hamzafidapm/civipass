@@ -4,31 +4,31 @@ import SwiftData
 @Model
 final class Question {
     var id: UUID
-    var prompt: String
-    var choices: [String]
-    var correctChoiceIndex: Int
     var category: StudyCategory
-    var isBookmarked: Bool
-    var timesAnsweredCorrectly: Int
-    var timesAnsweredIncorrectly: Int
+    var questionText: String
+    var options: [String]
+    var correctAnswerIndex: Int
+    var explanation: String?
+    var difficulty: QuestionDifficulty
+    var source: String?
 
     init(
         id: UUID = UUID(),
-        prompt: String,
-        choices: [String],
-        correctChoiceIndex: Int,
         category: StudyCategory,
-        isBookmarked: Bool = false,
-        timesAnsweredCorrectly: Int = 0,
-        timesAnsweredIncorrectly: Int = 0
+        questionText: String,
+        options: [String],
+        correctAnswerIndex: Int,
+        explanation: String? = nil,
+        difficulty: QuestionDifficulty,
+        source: String? = nil
     ) {
         self.id = id
-        self.prompt = prompt
-        self.choices = choices
-        self.correctChoiceIndex = correctChoiceIndex
         self.category = category
-        self.isBookmarked = isBookmarked
-        self.timesAnsweredCorrectly = timesAnsweredCorrectly
-        self.timesAnsweredIncorrectly = timesAnsweredIncorrectly
+        self.questionText = questionText
+        self.options = options
+        self.correctAnswerIndex = correctAnswerIndex
+        self.explanation = explanation
+        self.difficulty = difficulty
+        self.source = source
     }
 }
